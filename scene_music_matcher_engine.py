@@ -5,10 +5,17 @@ from __future__ import annotations
 # VERSION
 # ============================================================
 SCRIPT_NAME      = "scene_music_matcher_engine.py"
-SCRIPT_VERSION   = "3.3"
+SCRIPT_VERSION   = "3.31"
 PIPELINE_VERSION = f"{SCRIPT_NAME[:-3]}_v{SCRIPT_VERSION}"
 
 # ── Change log ──────────────────────────────────────────────
+# v3.31 (2026-05-21)
+#   • BUG FIX (Pylance reportInvalidTypeForm): v3.3 annotated _db_connect()
+#     with contextlib.AbstractContextManager[tuple[...]] which Pylance
+#     rejects — a @contextlib.contextmanager generator does not structurally
+#     satisfy AbstractContextManager (__enter__/__exit__ absent on Generator).
+#     Fix: return type changed to Generator[tuple[connection, cursor], None,
+#     None] (typing.Generator); Generator added to the typing import.
 # v3.3 (2026-05-13)
 #   • Added return type annotation to _db_connect() —
 #     contextlib.AbstractContextManager[tuple[...]] — the only
@@ -58,7 +65,7 @@ import math
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Generator, Optional
 
 import psycopg2
 from psycopg2.extras import Json, execute_values
@@ -523,7 +530,7 @@ def get_connection(db_config: dict[str, Any]) -> psycopg2.extensions.connection:
 @contextlib.contextmanager
 def _db_connect(
     db_config: dict[str, Any],
-) -> contextlib.AbstractContextManager[tuple[psycopg2.extensions.connection, psycopg2.extensions.cursor]]:
+) -> Generator[tuple[psycopg2.extensions.connection, psycopg2.extensions.cursor], None, None]:
     """Context manager: open a connection and guarantee close on exit.
 
     Usage::
