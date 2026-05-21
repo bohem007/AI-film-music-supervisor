@@ -1,0 +1,195 @@
+{
+  "emotion": {
+    "category_pl": "emocja",
+    "tags": {
+      "tension": "napięcie",
+      "suspense": "suspens",
+      "fear": "strach",
+      "anxiety": "niepokój",
+      "danger": "zagrożenie",
+      "sadness": "smutek",
+      "grief": "żal",
+      "melancholy": "melancholia",
+      "loneliness": "samotność",
+      "nostalgia": "nostalgia",
+      "joy": "radość",
+      "happiness": "szczęście",
+      "hope": "nadzieja",
+      "relief": "ulga",
+      "love": "miłość",
+      "romance": "romantyzm",
+      "warmth": "ciepło emocjonalne",
+      "anger": "gniew",
+      "aggression": "agresja",
+      "determination": "determinacja",
+      "courage": "odwaga",
+      "triumph": "triumf",
+      "epic": "epickość",
+      "heroism": "heroizm",
+      "mystery": "tajemnica",
+      "curiosity": "ciekawość",
+      "wonder": "zachwyt",
+      "awe": "podziw",
+      "serenity": "pogoda ducha",
+      "calm": "spokój",
+      "peace": "pokój",
+      "spirituality": "duchowość"
+    }
+  },
+
+  "scene": {
+    "category_pl": "scena",
+    "tags": {
+      "dialogue": "dialog",
+      "conversation": "rozmowa",
+      "transition": "przejście",
+      "montage": "montaż",
+      "investigation": "śledztwo",
+      "action": "akcja",
+      "climax": "kulminacja",
+      "resolution": "rozwiązanie",
+      "aftermath": "następstwa",
+      "horror_scene": "scena horroru",
+      "thriller_scene": "scena thrillera",
+      "romantic_scene": "scena romantyczna",
+      "dramatic_scene": "scena dramatyczna",
+      "comedic_scene": "scena komediowa"
+    }
+  },
+
+  "energy": {
+    "category_pl": "energia",
+    "tags": {
+      "very_low": "bardzo niska",
+      "low": "niska",
+      "medium": "średnia",
+      "high": "wysoka",
+      "very_high": "bardzo wysoka"
+    }
+  },
+
+  "tempo": {
+    "category_pl": "tempo",
+    "tags": {
+      "very_slow": "bardzo wolne",
+      "slow": "wolne",
+      "moderate": "umiarkowane",
+      "fast": "szybkie",
+      "very_fast": "bardzo szybkie"
+    }
+  },
+
+  "rhythm": {
+    "category_pl": "rytm",
+    "tags": {
+      "steady": "równy",
+      "syncopated": "synkopowany",
+      "irregular": "nieregularny",
+      "driving": "napędzający",
+      "floating": "płynący",
+      "free": "swobodny"
+    }
+  },
+
+  "intensity_shape": {
+    "category_pl": "kształt intensywności",
+    "tags": {
+      "static": "stała",
+      "gradual_build": "stopniowy wzrost",
+      "crescendo": "crescendo",
+      "peak": "szczyt",
+      "climax_peak": "szczyt kulminacyjny",
+      "drop": "spadek",
+      "release": "rozładowanie",
+      "wave": "falowanie",
+      "pulsating": "pulsowanie"
+    }
+  },
+
+  "narrative": {
+    "category_pl": "funkcja narracyjna",
+    "tags": {
+      "background": "tło",
+      "foreground": "pierwszy plan",
+      "underscore": "podkład narracyjny",
+      "emotional_support": "wsparcie emocjonalne",
+      "tension_building": "budowanie napięcia",
+      "suspense_building": "budowanie suspensu",
+      "anticipation": "oczekiwanie",
+      "release": "rozładowanie",
+      "payoff": "punkt kulminacyjny narracji",
+      "transition": "przejście",
+      "bridge": "most",
+      "accent": "akcent",
+      "stinger": "nagły akcent",
+      "climax_support": "wsparcie kulminacji"
+    }
+  },
+
+  "sound_character": {
+    "category_pl": "charakter dźwięku",
+    "tags": {
+      "atmospheric": "atmosferyczny",
+      "textured": "teksturalny",
+      "dense": "gęsty",
+      "sparse": "rzadki",
+      "wide": "szeroki",
+      "intimate": "intymny",
+      "distorted": "zniekształcony",
+      "clean": "czysty",
+      "noisy": "szumowy",
+      "glitchy": "glitchowy",
+      "analog": "analogowy",
+      "digital": "cyfrowy"
+    }
+  },
+
+  "usage": {
+    "category_pl": "zastosowanie",
+    "tags": {
+      "background_music": "muzyka tła",
+      "film_score": "muzyka filmowa",
+      "trailer_music": "muzyka trailerowa"
+    }
+  },
+
+  "instrumentation": {
+    "category_pl": "instrumentarium",
+    "tags": {
+      "hits": "uderzenia orkiestrowe",
+      "impacts": "uderzenia efektowe",
+      "pulses": "pulsacje",
+      "drums": "perkusja",
+      "strings": "smyczki",
+      "piano": "fortepian",
+      "synth": "syntezator",
+      "guitar": "gitara",
+      "choir": "chór",
+      "pads": "pady"
+    }
+  },
+
+  "atmosphere": {
+    "category_pl": "atmosfera",
+    "tags": {
+      "dark": "mroczna",
+      "eerie": "niepokojąca",
+      "warm": "ciepła",
+      "uplifting": "podnosząca",
+      "emotional": "emocjonalna",
+      "serious": "poważna",
+      "playful": "figlarna",
+      "intimate": "intymna",
+      "expansive": "rozległa"
+    }
+  },
+
+  "special": {
+    "category_pl": "tagi specjalne",
+    "tags": {
+      "dialogue_safe": "bezpieczny pod dialog",
+      "restrained": "powściągliwy",
+      "cinematic": "filmowy"
+    }
+  }
+}

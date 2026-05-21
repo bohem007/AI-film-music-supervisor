@@ -1,0 +1,77 @@
+# ============================================================
+#  AI Music Supervisor — Streamlit Community Cloud
+#  requirements.txt
+# ============================================================
+#
+#  IMPORTANT — READ BEFORE DEPLOYING
+#  ----------------------------------
+#  Streamlit Community Cloud runs on Linux x86-64 with Python 3.11.
+#  The app uses PyTorch + HuggingFace Transformers to load the
+#  laion/clap-htsat-unfused model.  The Community Cloud free tier
+#  has ~1 GB RAM — CLAP requires ~800 MB on CPU, which is tight.
+#  Consider upgrading to a paid workspace or using a lighter model
+#  if you hit memory errors.
+#
+#  System packages (ffmpeg, libsndfile) are declared in packages.txt
+#  (see companion file).  Streamlit Community Cloud installs those
+#  via apt-get before pip.
+#
+#  boto3 / botocore are included for optional Cloudflare R2 cloud
+#  mode (CLOUD_MUSIC=true).  They are harmless when cloud mode is off.
+#
+#  Pin strategy: lower-bound pins (>=) keep you on a recent release
+#  while allowing patch updates.  If you need exact reproducibility,
+#  run  pip freeze > requirements.txt  in your local venv and commit
+#  the resulting locked file instead.
+# ============================================================
+
+
+# ── Web framework ────────────────────────────────────────────────────────────
+streamlit>=1.45.0
+
+
+# ── AI / ML core ─────────────────────────────────────────────────────────────
+# PyTorch — CPU-only wheel keeps the slug small on Community Cloud.
+# Remove the --index-url line and the +cpu suffix if you need CUDA locally.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch>=2.3.0
+
+transformers>=4.40.0          # ClapModel, ClapProcessor
+huggingface-hub>=0.23.0       # model download / caching
+accelerate>=0.30.0            # optional but recommended by transformers
+
+
+# ── OpenAI ───────────────────────────────────────────────────────────────────
+openai>=1.30.0
+
+
+# ── Audio processing ─────────────────────────────────────────────────────────
+librosa>=0.10.2
+soundfile>=0.12.1             # backend for librosa on Linux (needs libsndfile → packages.txt)
+numba>=0.59.0                 # JIT backend for librosa (installed automatically, listed for clarity)
+scipy>=1.13.0                 # signal processing used by librosa
+
+
+# ── Numerical / data ─────────────────────────────────────────────────────────
+numpy>=1.26.0
+pandas>=2.2.0
+
+
+# ── Database ─────────────────────────────────────────────────────────────────
+psycopg2-binary>=2.9.9        # PostgreSQL / Neon Cloud connector
+
+
+# ── Cloud storage (Cloudflare R2 / S3-compatible) ────────────────────────────
+boto3>=1.34.0
+botocore>=1.34.0
+
+
+# ── Document generation ───────────────────────────────────────────────────────
+reportlab>=4.1.0              # PDF generation
+openpyxl>=3.1.2               # XLSX export
+textract>=1.6.5               # .doc reading Strategy 2 (requires antiword in packages.txt)
+
+
+# ── Config & validation ───────────────────────────────────────────────────────
+python-dotenv>=1.0.1          # .env file loading
+pydantic>=2.7.0               # data validation / dataclasses
