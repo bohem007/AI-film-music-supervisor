@@ -4,7 +4,7 @@
 # VERSION
 # ============================================================
 SCRIPT_NAME      = "screenplay_parser_engine.py"
-SCRIPT_VERSION   = "3.06"
+SCRIPT_VERSION   = "3.07"
 PIPELINE_VERSION = f"{SCRIPT_NAME[:-3]}_v{SCRIPT_VERSION}"
 
 """
@@ -15,6 +15,15 @@ Zero Streamlit imports — importable from tests, CLI, or notebooks.
 
 Change log
 ──────────
+v3.07 (2026-05-22)
+  • BUG FIX: read_docx_bytes() ignored <w:br/> (soft return / SHIFT+ENTER)
+    elements inside paragraphs. Polish screenplays written in MS Word commonly
+    use SHIFT+ENTER to separate dialogue lines within a single <w:p> block.
+    The previous parser only walked <w:t> nodes, so every line in the paragraph
+    concatenated without any separator — producing a single run-on string.
+    Fix: the parser now iterates all child elements of each <w:p>; a <w:br/>
+    emits "\n" and a <w:br w:type="page"/> emits "\n\n"; text nodes are
+    collected as before. normalize_whitespace() then folds excess newlines.
 v3.06 (2026-05-13)
   • Added return type annotation ``psycopg2.extensions.connection``
     to the module-level get_connection() — the only function in this
@@ -474,13 +483,22 @@ def read_docx_bytes(data: bytes) -> str:
     with zipfile.ZipFile(io.BytesIO(data)) as zf:
         xml_data = zf.read("word/document.xml")
     root = ET.fromstring(xml_data)
-    ns   = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
-    lines: list[str] = []
+    ns    = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
+    para_strings: list[str] = []
     for para in root.findall(".//w:p", ns):
-        texts = [node.text for node in para.findall(".//w:t", ns) if node.text]
-        if texts:
-            lines.append("".join(texts))
-    return "\n".join(lines)
+        parts: list[str] = []
+        for elem in para.iter():
+            # Strip namespace prefix to get the local tag name
+            local = elem.tag.split("}")[-1] if "}" in elem.tag else elem.tag
+            if local == "t" and elem.text:
+                parts.append(elem.text)
+            elif local == "br":
+                # w:br w:type="page"  → paragraph / page break → double newline
+                # w:br (no type) or w:type="textWrapping" → soft return (SHIFT+ENTER)
+                br_type = elem.get(f"{{{ns['w']}}}type", "")
+                parts.append("\n\n" if br_type == "page" else "\n")
+        para_strings.append("".join(parts))
+    return "\n".join(para_strings)
 
 
 def _find_soffice() -> Optional[str]:
